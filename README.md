@@ -13,4 +13,4 @@ Esse projeto foi criado pelo Grupo 7 - 📜 Rolê dos Gregos Antigos 🛡⚔
 * Hitallo Cavalcanti da Silva
 * Lucas Albuquerque
 * Matheus de Andrade Lima
-* Matheus Lima Borges Prado
+* Mateus Nunes Galdino da Silveira
