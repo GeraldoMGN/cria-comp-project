@@ -1,0 +1,6 @@
+Pillow
+numpy
+keras
+face_recognition
+opencv-python
+matplotlib
