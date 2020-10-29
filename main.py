@@ -16,18 +16,18 @@ emotion_dict = {'Angry': 0, 'Sad': 5, 'Neutral': 4,
                 'Disgust': 1, 'Surprise': 6, 'Fear': 2, 'Happy': 3}
 
 # API de remoção de background
-# response = requests.post(
-#  'https://api.remove.bg/v1.0/removebg',
-#  files={'image_file': open(image_filename, 'rb')},
-#  data={'size': 'auto'},
-#  headers={'X-Api-Key': 'LAHpJwBK3Ly6GsqLuE2tb5Kh'},
-# )
+ response = requests.post(
+  'https://api.remove.bg/v1.0/removebg',
+  files={'image_file': open(image_filename, 'rb')},
+  data={'size': 'auto'},
+  headers={'X-Api-Key': 'LAHpJwBK3Ly6GsqLuE2tb5Kh'},
+ )
 
-# if response.status_code == requests.codes.ok:
-#  with open('photo-no-background.png', 'wb') as out:
-#    out.write(response.content)
-# else:
-#    print("Error:", response.status_code, response.text)
+ if response.status_code == requests.codes.ok:
+  with open('photo-no-background.png', 'wb') as out:
+    out.write(response.content)
+ else:
+    print("Error:", response.status_code, response.text)
 
 # Identificando a localização e selecionando a face
 image = face_recognition.load_image_file("./photo-no-background.png")
