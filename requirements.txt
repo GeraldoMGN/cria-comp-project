@@ -1,9 +1,2 @@
 Pillow
-numpy
-keras
-cmake
-dlib
-tensorflow
-face_recognition
-opencv-python
-matplotlib
+boto3
