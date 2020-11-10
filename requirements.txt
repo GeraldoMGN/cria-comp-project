@@ -1,2 +1,4 @@
 Pillow
 boto3
+instafilter
+cv2
