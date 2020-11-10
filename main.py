@@ -5,7 +5,8 @@ from random import randint
 import boto3
 import json
 import tempfile
-
+from instafilter import Instafilter
+import cv2
 
 # Flags
 should_remove_background = False  # Usar com moderação
@@ -96,3 +97,10 @@ if __name__ == '__main__':
             image_no_bg_filename, background_filename)
 
         paste_image(image_no_bg_resized_filename, background_filename)
+        
+        model = Instafilter("Lo-fi")
+        new_image = model(get_filename_no_extension(
+        source_filename) + '-' + get_filename_no_extension(target_filename) + '.png')
+
+        # To save the image, use cv2
+        cv2.imwrite("modified_image.jpg", new_image)
