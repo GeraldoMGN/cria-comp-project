@@ -78,12 +78,13 @@ def paste_image(source_filename, target_filename):
 
 
 def lambda_handler(event, context):
-    # Arquivo de input
+    event_body = event.get('body')
+    image_string = event_body[event_body.find('/9'):]
+
     image_filename = "photo.jpg"
 
-    print()
     with open('/tmp/' + image_filename, "wb") as fh:
-        fh.write(base64.b64decode(event['img']))
+        fh.write(base64.b64decode(image_string))
 
     image_no_bg_filename = remove_background('/tmp/' + image_filename)
 
@@ -100,8 +101,11 @@ def lambda_handler(event, context):
 
     with open(result, "rb") as image_file:
         encoded_image = base64.b64encode(image_file.read())
+        response_body = {
+            'img': str(encoded_image)
+        }
 
-    return {
-        'code': 200,
-        'img': encoded_image
-    }
+        return {
+            'statusCode': 200,
+            'body': json.dumps(response_body)
+        }
