@@ -37,7 +37,7 @@ def remove_background(filename):
         'https://api.remove.bg/v1.0/removebg',
         files={'image_file': open(filename, 'rb')},
         data={'size': 'auto'},
-        headers={'X-Api-Key': 'LAHpJwBK3Ly6GsqLuE2tb5Kh'},
+        headers={'X-Api-Key': 'FL7YMvV5rm66HsAmjyS6QhJr'},
     )
 
     if response.status_code == requests.codes.ok:
@@ -100,12 +100,17 @@ def lambda_handler(event, context):
     result = paste_image(image_no_bg_resized_filename, background_filename)
 
     with open(result, "rb") as image_file:
-        encoded_image = base64.b64encode(image_file.read())
+        encoded_image = base64.b64encode(image_file.read()).decode('utf-8')
         response_body = {
-            'img': str(encoded_image)
+            'img': 'data:image/jpeg;base64,' + encoded_image
         }
 
         return {
             'statusCode': 200,
-            'body': json.dumps(response_body)
+            'body': json.dumps(response_body),
+            'headers': {
+                'Access-Control-Allow-Headers': 'Content-Type',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'PUT,POST,GET'
+            },
         }
