@@ -92,7 +92,7 @@ def lambda_handler(event, context):
 
     # Seleciona um background aleatório baseado na emoção identificada
     background_filename = "IMG/" + \
-        str(predicted_label) + "/0" + str(randint(1, 1)) + ".jpg"
+        str(predicted_label) + "/0" + str(randint(1, 3)) + ".jpg"
 
     image_no_bg_resized_filename = resize_image(
         image_no_bg_filename, background_filename)
