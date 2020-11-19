@@ -72,7 +72,7 @@ def remove_background(filename):
         'https://api.remove.bg/v1.0/removebg',
         files={'image_file': open(filename, 'rb')},
         data={'size': 'auto'},
-        headers={'X-Api-Key': 'FL7YMvV5rm66HsAmjyS6QhJr'},
+        headers={'X-Api-Key': 'gy6f2aUkPkXLLrmDbhdgmMo1'},
     )
 
     if response.status_code == requests.codes.ok:
