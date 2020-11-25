@@ -99,10 +99,23 @@ def lambda_handler(event, context):
 
     result = paste_image(image_no_bg_resized_filename, background_filename)
 
+    sentiment_translations = {
+        'ANGRY': 'Raiva',
+        'CALM': 'Calmo',
+        'CONFUSED': 'Confuso',
+        'DISGUSTED': 'Nojo',
+        'FEAR': 'Medo',
+        'HAPPY': 'Feliz',
+        'SAD': 'Triste',
+        'SURPRISED': 'Surpreso',
+        'UNKNOWN': 'Desconhecido'
+    }
+
     with open(result, "rb") as image_file:
         encoded_image = base64.b64encode(image_file.read()).decode('utf-8')
         response_body = {
-            'img': 'data:image/jpeg;base64,' + encoded_image
+            'img': 'data:image/jpeg;base64,' + encoded_image,
+            'sentiment': sentiment_translations.get(predicted_label)
         }
 
         return {

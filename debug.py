@@ -12,7 +12,9 @@ if __name__ == '__main__':
     }
 
     response = lambda_function.lambda_handler(event, None)
-    parsed_response = json.loads(response.get("body")).get("img")
+    parsed_body = json.loads(response.get("body"))
+    parsed_response = parsed_body.get("img")
+    print(parsed_body.get('sentiment'))
     image_string = parsed_response[parsed_response.find('64,') + 3:]
 
     with open('test_out.jpg', "wb") as fh:
