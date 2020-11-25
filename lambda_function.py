@@ -47,8 +47,15 @@ def remove_background(filename):
             out.write(response.content)
         return result_filename
     else:
-        print("Error:", response.status_code, response.text)
-    return None
+        return {
+            'statusCode': 500,
+            'body': json.dumps('Não foi possível identificar o fundo da imagem'),
+            'headers': {
+                'Access-Control-Allow-Headers': 'Content-Type',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': 'PUT,POST,GET'
+            },
+        }
 
 
 # Redimencionado foto baseado na proporção alvo/fonte
@@ -87,6 +94,9 @@ def lambda_handler(event, context):
         fh.write(base64.b64decode(image_string))
 
     image_no_bg_filename = remove_background('/tmp/' + image_filename)
+
+    if isinstance(image_no_bg_filename, dict):
+        return image_no_bg_filename
 
     predicted_label = predict_label(image_no_bg_filename)
 
